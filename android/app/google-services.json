@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "4559722572",
+    "project_id": "forlearnchatapp",
+    "storage_bucket": "forlearnchatapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4559722572:android:04d44aa081b3dbc7a0bce9",
+        "android_client_info": {
+          "package_name": "com.example.ForLearnChatApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4559722572-kc6nas2eb41r6olqcpd1jnqb34ai8f9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZa2hQqfxvKmv40fio61tdtx8EQVDMun4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4559722572-kc6nas2eb41r6olqcpd1jnqb34ai8f9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
