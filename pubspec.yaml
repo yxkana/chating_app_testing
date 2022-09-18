@@ -39,6 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   cloud_firestore: ^3.4.7
   firebase_core: ^1.22.0
+  firebase_auth: ^3.9.0
   uuid: ^3.0.6
 
 dev_dependencies:
@@ -83,6 +84,9 @@ flutter:
     - family: InterRegular
       fonts:
       - asset: Assets/fonts/Inter-Regular.ttf
+    - family: InterBold
+      fonts:
+      - asset: Assets/fonts/Inter-Bold.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
