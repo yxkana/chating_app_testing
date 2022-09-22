@@ -5,11 +5,24 @@ import 'package:uuid/uuid.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../Widgets/chat/messages.dart';
 import '../Widgets/chat/new_message.dart';
+import './profile_page.dart';
 
 class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<PopupMenuEntry> popUpmenuList = [
+      PopupMenuItem(
+          value: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(
+                Icons.person,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              Text("Profile")
+            ],
+          )),
       PopupMenuItem(
           onTap: () {
             FirebaseAuth.instance.signOut();
@@ -27,15 +40,22 @@ class ChatScreen extends StatelessWidget {
                   ),
                   Text("Logout")
                 ]),
-          ))
+          )),
     ];
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         actions: [
-          PopupMenuButton(itemBuilder: ((context) {
+          PopupMenuButton(onSelected: ((value) {
+            if (value == 0) {
+              print("ss");
+              Navigator.push(context, MaterialPageRoute(builder: ((context) {
+                return MyProfile();
+              })));
+            }
+          }), itemBuilder: ((context) {
             return popUpmenuList;
-          }))
+          })),
         ],
         title: Text(
           "ChatRoom",
