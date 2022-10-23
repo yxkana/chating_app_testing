@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import './register_screen.dart';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
+import './auth_verified_email_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -25,7 +26,9 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Future authLogin(String email, String password) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      setState(() {
+        _auth.signInWithEmailAndPassword(email: email, password: password);
+      });
     } on PlatformException catch (err) {
       var message = "Something went wrong";
       if (err != null) {

@@ -6,8 +6,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../Widgets/chat/messages.dart';
 import '../Widgets/chat/new_message.dart';
 import './profile_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
+  String chatRoomId;
+
+  ChatScreen(this.chatRoomId);
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    final fbm = FirebaseMessaging.instance.getNotificationSettings();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<PopupMenuEntry> popUpmenuList = [
@@ -48,7 +66,6 @@ class ChatScreen extends StatelessWidget {
         actions: [
           PopupMenuButton(onSelected: ((value) {
             if (value == 0) {
-              print("ss");
               Navigator.push(context, MaterialPageRoute(builder: ((context) {
                 return MyProfile();
               })));
@@ -75,7 +92,7 @@ class ChatScreen extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Container(
                   child: Column(
-                    children: [Expanded(child: Messages())],
+                    children: [Expanded(child: Messages(widget.chatRoomId))],
                   ),
                 );
               } else {
@@ -86,7 +103,7 @@ class ChatScreen extends StatelessWidget {
             },
           ),
         ),
-        Align(alignment: Alignment.bottomCenter, child: NewMessage())
+        Align(alignment: Alignment.bottomCenter, child: NewMessage(widget.chatRoomId))
       ]),
     );
   }

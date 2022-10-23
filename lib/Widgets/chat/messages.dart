@@ -3,9 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Messages extends StatefulWidget {
-  const Messages({super.key});
+  String chatId;
+
+  Messages(this.chatId);
 
   @override
   State<Messages> createState() => _MessagesState();
@@ -17,7 +20,9 @@ class _MessagesState extends State<Messages> {
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection("chat/")
+            .collection("chats")
+            .doc(widget.chatId)
+            .collection("messages")
             .orderBy("timeStamp", descending: false)
             .snapshots(),
         builder: (context, snapshot) {

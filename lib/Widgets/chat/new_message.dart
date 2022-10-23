@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -6,7 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class NewMessage extends StatefulWidget {
-  const NewMessage({super.key});
+  String chatId;
+
+  NewMessage(this.chatId);
 
   @override
   State<NewMessage> createState() => _NewMessageState();
@@ -22,12 +25,26 @@ class _NewMessageState extends State<NewMessage> {
         .collection("users")
         .doc(_auth.currentUser!.uid)
         .get();
-    FirebaseFirestore.instance.collection("chat").add({
+
+    FirebaseFirestore.instance
+        .collection("chats")
+        .doc(widget.chatId)
+        .collection("messages")
+        .doc()
+        .set({
       "text": message,
       "timeStamp": Timestamp.now(),
       "userId": _auth.currentUser!.uid,
       "userName": userName["username"]
     });
+
+    /* FirebaseFirestore.instance.collection("chats/").add({
+      "text": message,
+      "timeStamp": Timestamp.now(),
+      "userId": _auth.currentUser!.uid,
+      "userName": userName["username"]
+    }); */
+
     setState(() {
       _messages.clear();
     });
@@ -50,6 +67,8 @@ class _NewMessageState extends State<NewMessage> {
           ),
           IconButton(
               onPressed: () {
+                print("ssss");
+                print(widget.chatId);
                 _messages.text.trim().isEmpty
                     ? null
                     : sendMessage(_messages.text);

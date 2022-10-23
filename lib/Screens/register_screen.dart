@@ -5,6 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//Screen
+import './auth_verified_email_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -15,6 +18,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   bool _showPassword = false;
   bool _showPasswordAgain = false;
+  bool _authEmail = false;
 
   var nickNameText = TextEditingController();
   var eMailText = TextEditingController();
@@ -26,11 +30,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future authRegister(String email, String userName, String password) async {
     try {
       var authResault = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      await FirebaseFirestore.instance.collection("users").doc(authResault.user!.uid).set({
-        "username": userName,
-        "email": email
-      });
+          email: email.trim(), password: password.trim());
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(authResault.user!.uid)
+          .set({"username": userName, "email": email});
     } on PlatformException catch (err) {
       var message = "Something went wrong";
       if (err != null) {
@@ -331,8 +335,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         bool _isValid = _formKey.currentState!.validate();
                         if (_isValid == true) {
                           _formKey.currentState?.save();
-                          await authRegister(eMailText.text, nickNameText.text,
-                              passwordText.text);
+                          setState(() {
+                            _authEmail = true;
+                          });
+                          if (_authEmail == true) {
+                            print("ddddddddddd");
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return VerifeidEmailScreen(
+                                    eMailText.text,
+                                    passwordText.text,
+                                    nickNameText.text,
+                                    authRegister);
+                              },
+                            ));
+                            
+                            /* await authRegister(eMailText.text,
+                                nickNameText.text, passwordText.text); */
+                          }
                         }
                       },
                       child: Container(
