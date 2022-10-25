@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../Screens/chat_screen.dart';
+import '../Widgets/profiles/main_profile.dart';
 
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key});
@@ -26,13 +27,20 @@ class _MessagesScreenState extends State<MessagesScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Messages",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontSize: 36,
-                      fontFamily: "InterBold"),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 110),
+                    child: Text(
+                      "Messages",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                          fontSize: 36,
+                          fontFamily: "InterBold"),
+                    ),
+                  ),
                 ),
+                Padding(
+                    padding: EdgeInsets.only(right: 10), child: MainProfile())
               ],
             ),
             Expanded(

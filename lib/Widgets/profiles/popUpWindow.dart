@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:new_app/Providers.dart/home_Provider.dart';
+import 'package:new_app/Screens/messages.dart';
+import 'package:new_app/Widgets/chat/messages.dart';
 import 'package:provider/provider.dart';
 
 class popUpProfile extends StatefulWidget {
@@ -101,7 +103,13 @@ class _popUpProfileState extends State<popUpProfile> {
                                         .doc(widget.oponentId)
                                         .update({
                                       "chatsId": FieldValue.arrayUnion(list),
-                                    }));
+                                    }))
+                                .then((value) =>
+                                    Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return MessagesScreen();
+                                      },
+                                    )));
 
                             /* Navigator.of(context).pop();
 

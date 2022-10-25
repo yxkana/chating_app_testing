@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 //Screens
 import './profile_page.dart';
-import './users_crossroad.dart';
+import 'people.dart';
 import './chat_screen.dart';
 import './wallScreen.dart';
 import './messages.dart';

@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Routes/CustomRouteForPopUp.dart';
 import '../Widgets/profiles/popUpWindow.dart';
 import '../Widgets/profiles/popImageWindowWith.dart';
+import '../Widgets/profiles/main_profile.dart';
 
 class ScrossRoadsScreen extends StatefulWidget {
   const ScrossRoadsScreen({super.key});
@@ -31,13 +32,19 @@ class _ScrossRoadsScreenState extends State<ScrossRoadsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Screen Ink",
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontSize: 36,
-                    fontFamily: "InterBold"),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 140),
+                  child: Text(
+                    "People",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 36,
+                        fontFamily: "InterBold"),
+                  ),
+                ),
               ),
+              Padding(padding: EdgeInsets.only(right: 10), child: MainProfile())
             ],
           ),
           Expanded(
